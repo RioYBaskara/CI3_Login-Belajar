@@ -1,5 +1,7 @@
 <div class="container">
-
+    <!-- <?php echo set_value('email'); ?>
+    <?php echo set_value('name'); ?>
+    <?php echo set_value('password1'); ?> -->
     <div class="card o-hidden border-0 shadow-lg my-5 col-lg-7 mx-auto">
         <div class="card-body p-0">
             <!-- Nested Row within Card Body -->
