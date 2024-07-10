@@ -23,6 +23,7 @@
                 ORDER BY `user_access_menu`.`menu_id` ASC";
 
     $menu = $this->db->query($queryMenu)->result_array();
+
     ?>
 
     <!-- LOOPING MENU -->
