@@ -24,8 +24,11 @@ class Menu extends CI_Controller
         $data['title'] = 'Menu Management';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-        $data['menu'] = $this->db->get('user_menu')->result_array();
+        // buat dashboard
         $data['jumlahuser'] = $this->db->get('user')->num_rows();
+
+        // modal create
+        $data['menu'] = $this->db->get('user_menu')->result_array();
 
         $this->form_validation->set_rules('menu', 'Menu', 'required');
 
@@ -43,6 +46,28 @@ class Menu extends CI_Controller
             redirect('menu');
         }
     }
+
+    public function edit()
+    {
+        $data['title'] = 'Menu Management';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $this->form_validation->set_rules('menu', 'Menu', 'required');
+        if ($this->form_validation->run() == FALSE) {
+            redirect('menu', $data);
+        } else {
+            $data = array(
+                "menu" => $this->input->post('menu')
+            );
+            $this->db->where('id', $this->input->post('id'));
+            $this->db->update('user_menu', $data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Menu Edited!<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button></div>');
+            redirect('menu');
+        }
+    }
+
     public function submenu()
     {
         $data['title'] = 'Submenu Management';
