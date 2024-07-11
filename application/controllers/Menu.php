@@ -19,6 +19,7 @@ class Menu extends CI_Controller
 
     }
 
+    // menu
     public function index()
     {
         $data['title'] = 'Menu Management';
@@ -77,6 +78,7 @@ class Menu extends CI_Controller
         redirect('menu');
     }
 
+    // Submenu
     public function submenu()
     {
         $data['title'] = 'Submenu Management';
@@ -112,4 +114,44 @@ class Menu extends CI_Controller
             redirect('menu/submenu');
         }
     }
+
+    public function submenuedit()
+    {
+        $data['title'] = 'Submenu Management';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $this->form_validation->set_rules('title', 'Title', 'required');
+        $this->form_validation->set_rules('menu_id', 'Menu', 'required');
+        $this->form_validation->set_rules('url', 'URL', 'required');
+        $this->form_validation->set_rules('icon', 'Icon', 'required');
+
+        if ($this->form_validation->run() == FALSE) {
+            redirect('menu/submenu', $data);
+        } else {
+            $data = array(
+                'title' => $this->input->post('title'),
+                'menu_id' => $this->input->post('menu_id'),
+                'url' => $this->input->post('url'),
+                'icon' => $this->input->post('icon'),
+                'is_active' => $this->input->post('is_active')
+            );
+            $this->db->where('id', $this->input->post('id'));
+            $this->db->update('user_sub_menu', $data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">SubMenu Edited!<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button></div>');
+            redirect('menu/submenu');
+        }
+
+
+    }
+    public function submenuhapus($id)
+    {
+        $this->db->delete("user_sub_menu", ["id" => $id]);
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Sub Menu Deleted!<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button></div>');
+        redirect('menu/submenu');
+    }
+
 }
