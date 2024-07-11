@@ -68,6 +68,15 @@ class Menu extends CI_Controller
         }
     }
 
+    public function hapus($id)
+    {
+        $this->db->delete("user_menu", ["id" => $id]);
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Menu Deleted!<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button></div>');
+        redirect('menu');
+    }
+
     public function submenu()
     {
         $data['title'] = 'Submenu Management';
