@@ -70,6 +70,10 @@ class User extends CI_Controller
 
                 } else {
                     echo $this->upload->display_errors();
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">' . $this->upload->display_errors() . '<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button></div>');
+                    redirect('user/edit');
                 }
             }
 
