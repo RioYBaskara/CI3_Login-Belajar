@@ -73,14 +73,14 @@ class Admin extends CI_Controller
         ];
 
         $result = $this->db->get_where('user_access_menu', $data);
-        
+
         if ($result->num_rows() < 1) {
             $this->db->insert('user_access_menu', $data);
         } else {
             $this->db->delete('user_access_menu', $data);
         }
 
-        $this->session->set_flashdata('akses', '<div class="alert alert-success" role="alert">Access Changed!<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Access Changed!<button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button></div>');
     }

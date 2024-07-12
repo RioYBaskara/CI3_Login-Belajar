@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-lg">
 
-            <?= $this->session->flashdata('akses'); ?>
+            <?= $this->session->flashdata('message'); ?>
 
             <h5>Role : <?= $role['role']; ?></h5>
 
