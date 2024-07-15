@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 10, 2024 at 06:20 AM
+-- Generation Time: Jul 15, 2024 at 08:44 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -43,9 +43,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `email`, `image`, `password`, `role_id`, `is_active`, `date_created`) VALUES
-(1, 'Rio Baskara', 'rio@rio.com', 'default.jpg', '$2y$10$gtlF8ZZrwznPtVHKDVlv8.Q8/cbg8rOJuWzfNOptfqvy0UHrq8.Ui', 2, 1, 1720499883),
+(1, 'Rio Baskara Edit', 'rio@rio.com', 'default.jpg', '$2y$10$gtlF8ZZrwznPtVHKDVlv8.Q8/cbg8rOJuWzfNOptfqvy0UHrq8.Ui', 2, 1, 1720499883),
 (2, 'dummy', 'dum@dum.com', 'default.jpg', '$2y$10$2l35C7rqq1jKm5DsTNnrGu8EZgAHtIEnkP/zOT/JPEM89r.5IpwIe', 2, 0, 1720500454),
-(3, 'root', 'r@r.com', 'default.jpg', '$2y$10$pRKTpByZy4ZAOZxLRWjMgeuyDbQjRUyupzEJATD/N36omgbfdpCvu', 1, 1, 1720578669);
+(3, 'root', 'r@r.com', 'woajk.jpg', '$2y$10$xzuPLABPFSPFiFflUpmQZOMg0rE6.ugdSbod/VWgJIa9GVqZCuKE.', 1, 1, 1720578669),
+(8, 'Rio Stembayo', 'riostembayo664@gmail.com', 'default.jpg', '$2y$10$OhZBtbj8ovhcuBaXjHGzfOynCyDmpNOu0RvdNYPt5V9yM4lr3aO1C', 2, 1, 1721016077);
 
 -- --------------------------------------------------------
 
@@ -66,7 +67,9 @@ CREATE TABLE `user_access_menu` (
 INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 (1, 1, 1),
 (2, 1, 2),
-(3, 2, 2);
+(3, 2, 2),
+(4, 1, 3),
+(5, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -85,7 +88,9 @@ CREATE TABLE `user_menu` (
 
 INSERT INTO `user_menu` (`id`, `menu`) VALUES
 (1, 'Admin'),
-(2, 'User');
+(2, 'User'),
+(3, 'Menu'),
+(4, 'Testing');
 
 -- --------------------------------------------------------
 
@@ -128,7 +133,36 @@ CREATE TABLE `user_sub_menu` (
 INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active`) VALUES
 (1, 1, 'Dashboard', 'admin', 'fas fa-fw fa-tachometer-alt', 1),
 (2, 2, 'My Profile', 'user', 'fas fa-fw fa-user', 1),
-(3, 2, 'Edit Profile', 'user/edit', 'fas fa-fw fa-user-edit', 1);
+(3, 2, 'Edit Profile', 'user/edit', 'fas fa-fw fa-user-edit', 1),
+(4, 3, 'Menu Management', 'menu', 'fas fas-fw fa-folder', 1),
+(5, 3, 'Submenu Management', 'menu/submenu', 'fas fa-fw fa-folder-open', 1),
+(6, 4, 'tesedit', 'coba/coba', 'fab fa-fw fa-youtube', 1),
+(7, 4, 'testingedit', 'test/test', 'fas fa-fw fa-icon', 1),
+(8, 4, 'dummytesting', 'dummy/dummys', 'dummy', 1),
+(9, 1, 'Role', 'admin/role', 'fas fa-fw fa-user-tie', 1),
+(10, 2, 'Change Password', 'user/changepassword', 'fas fa-fw fa-key', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_token`
+--
+
+CREATE TABLE `user_token` (
+  `id` int(11) NOT NULL,
+  `email` varchar(128) NOT NULL,
+  `token` varchar(128) NOT NULL,
+  `date_created` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_token`
+--
+
+INSERT INTO `user_token` (`id`, `email`, `token`, `date_created`) VALUES
+(6, 'riostembayo664@gmail.com', 'zcc1hClxfZ3QKFA6trujQET1CWwpLLwAkJr8SfZEcSE=', 1721018227),
+(7, 'riostembayo664@gmail.com', 'XyLzc7brSYBgEs+TgSWZYCglncGmolbSRvnwrEWOi3s=', 1721024474),
+(8, 'riostembayo664@gmail.com', '92l/6LVQF1uAh2mu4KmM63rySt1YmnPIanTZC1SKAhw=', 1721025110);
 
 --
 -- Indexes for dumped tables
@@ -165,6 +199,12 @@ ALTER TABLE `user_sub_menu`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `user_token`
+--
+ALTER TABLE `user_token`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -172,19 +212,19 @@ ALTER TABLE `user_sub_menu`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `user_menu`
 --
 ALTER TABLE `user_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `user_role`
@@ -196,7 +236,13 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `user_token`
+--
+ALTER TABLE `user_token`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
