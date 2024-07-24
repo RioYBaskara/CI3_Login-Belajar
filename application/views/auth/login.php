@@ -42,6 +42,11 @@
                                 <div class="text-center">
                                     <a class="small" href="<?= base_url('auth/registration'); ?>">Create an Account!</a>
                                 </div>
+                                <div class="text-center">
+                                    <p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds.
+                                        <?php echo (ENVIRONMENT === 'development') ? 'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
